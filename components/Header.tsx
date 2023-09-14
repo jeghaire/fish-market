@@ -35,7 +35,7 @@ export default function Header() {
   const items = useAppSelector(selectBasketItems);
 
   return (
-    <header className="top-0 z-50 bg-white">
+    <header className="top-0 bg-white">
       {/* <PromotionBanner /> */}
       <div className="border-b">
         <Wrapper className="flex items-center py-4 md:py-0">
@@ -46,7 +46,7 @@ export default function Header() {
                 <Link
                   key={title}
                   href={url}
-                  className={`py-4 text-[12px] text-sm font-medium text-black ${
+                  className={`py-4 text-[12px] font-medium text-black ${
                     isActive
                       ? 'border-b-2 border-black'
                       : 'hover:underline hover:decoration-from-font'
@@ -93,7 +93,7 @@ export default function Header() {
                 <Link
                   key={title}
                   href={url}
-                  className={`px-1 py-4 text-[11px] text-sm ${
+                  className={`px-1 py-4 text-[11px] ${
                     isActive
                       ? 'text-red-600 hover:text-black'
                       : 'text-black hover:!text-opacity-100 group-hover:text-opacity-75'

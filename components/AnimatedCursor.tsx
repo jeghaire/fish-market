@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 function useEventListener(
   eventName: string,
@@ -37,12 +37,12 @@ interface AnimatedCursorProps {
 }
 
 export default function AnimatedCursor({
-  color = "220, 90, 90",
+  color = '220, 90, 90',
   outerAlpha = 0.4,
   innerSize = 8,
   outerSize = 8,
   outerScale = 5,
-  innerScale = 0.7,
+  innerScale = 0.7
 }: AnimatedCursorProps) {
   const cursorOuterRef = useRef<HTMLDivElement>(null);
   const cursorInnerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +50,7 @@ export default function AnimatedCursor({
   const previousTimeRef = useRef<number>();
   const [coords, setCoords] = useState<{ x: number; y: number }>({
     x: 0,
-    y: 0,
+    y: 0
   });
   const [isVisible, setIsVisible] = useState(true);
   const [isActive, setIsActive] = useState(false);
@@ -62,8 +62,8 @@ export default function AnimatedCursor({
     const { clientX, clientY } = event;
     setCoords({ x: clientX, y: clientY });
     if (cursorInnerRef.current) {
-      cursorInnerRef.current.style.top = clientY + "px";
-      cursorInnerRef.current.style.left = clientX + "px";
+      cursorInnerRef.current.style.top = clientY + 'px';
+      cursorInnerRef.current.style.left = clientX + 'px';
     }
     endX.current = clientX;
     endY.current = clientY;
@@ -75,8 +75,8 @@ export default function AnimatedCursor({
         coords.x += (endX.current - coords.x) / 8;
         coords.y += (endY.current - coords.y) / 8;
         if (cursorOuterRef.current) {
-          cursorOuterRef.current.style.top = coords.y + "px";
-          cursorOuterRef.current.style.left = coords.x + "px";
+          cursorOuterRef.current.style.top = coords.y + 'px';
+          cursorOuterRef.current.style.left = coords.x + 'px';
         }
       }
       previousTimeRef.current = time;
@@ -95,19 +95,19 @@ export default function AnimatedCursor({
   const onMouseEnter = useCallback(() => setIsVisible(true), []);
   const onMouseLeave = useCallback(() => setIsVisible(false), []);
 
-  useEventListener("mousemove", onMouseMove, document);
-  useEventListener("mousedown", onMouseDown, document);
-  useEventListener("mouseup", onMouseUp, document);
-  useEventListener("mouseenter", onMouseEnter, document);
-  useEventListener("mouseleave", onMouseLeave, document);
+  // useEventListener('mousemove', onMouseMove, document);
+  useEventListener('mousedown', onMouseDown, document);
+  useEventListener('mouseup', onMouseUp, document);
+  useEventListener('mouseenter', onMouseEnter, document);
+  useEventListener('mouseleave', onMouseLeave, document);
 
   useEffect(() => {
     if (isActive && cursorInnerRef.current && cursorOuterRef.current) {
       cursorInnerRef.current.style.transform = `scale(${innerScale})`;
       cursorOuterRef.current.style.transform = `scale(${outerScale})`;
     } else if (cursorInnerRef.current && cursorOuterRef.current) {
-      cursorInnerRef.current.style.transform = "scale(1)";
-      cursorOuterRef.current.style.transform = "scale(1)";
+      cursorInnerRef.current.style.transform = 'scale(1)';
+      cursorOuterRef.current.style.transform = 'scale(1)';
     }
   }, [innerScale, outerScale, isActive]);
 
@@ -120,11 +120,11 @@ export default function AnimatedCursor({
 
   useEffect(() => {
     if (isVisible && cursorInnerRef.current && cursorOuterRef.current) {
-      cursorInnerRef.current.style.opacity = "1";
-      cursorOuterRef.current.style.opacity = "1";
+      cursorInnerRef.current.style.opacity = '1';
+      cursorOuterRef.current.style.opacity = '1';
     } else if (cursorInnerRef.current && cursorOuterRef.current) {
-      cursorInnerRef.current.style.opacity = "0";
-      cursorOuterRef.current.style.opacity = "0";
+      cursorInnerRef.current.style.opacity = '0';
+      cursorOuterRef.current.style.opacity = '0';
     }
   }, [isVisible]);
 
@@ -134,22 +134,22 @@ export default function AnimatedCursor({
     );
     clickables.forEach((el) => {
       if (el instanceof HTMLElement) {
-        el.style.cursor = "none";
+        el.style.cursor = 'none';
 
-        el.addEventListener("mouseover", () => {
+        el.addEventListener('mouseover', () => {
           setIsActive(true);
         });
-        el.addEventListener("click", () => {
+        el.addEventListener('click', () => {
           setIsActive(true);
           setIsActiveClickable(false);
         });
-        el.addEventListener("mousedown", () => {
+        el.addEventListener('mousedown', () => {
           setIsActiveClickable(true);
         });
-        el.addEventListener("mouseup", () => {
+        el.addEventListener('mouseup', () => {
           setIsActive(true);
         });
-        el.addEventListener("mouseout", () => {
+        el.addEventListener('mouseout', () => {
           setIsActive(false);
           setIsActiveClickable(false);
         });
@@ -159,20 +159,20 @@ export default function AnimatedCursor({
     return () => {
       clickables.forEach((el) => {
         if (el instanceof HTMLElement) {
-          el.removeEventListener("mouseover", () => {
+          el.removeEventListener('mouseover', () => {
             setIsActive(true);
           });
-          el.removeEventListener("click", () => {
+          el.removeEventListener('click', () => {
             setIsActive(true);
             setIsActiveClickable(false);
           });
-          el.removeEventListener("mousedown", () => {
+          el.removeEventListener('mousedown', () => {
             setIsActiveClickable(true);
           });
-          el.removeEventListener("mouseup", () => {
+          el.removeEventListener('mouseup', () => {
             setIsActive(true);
           });
-          el.removeEventListener("mouseout", () => {
+          el.removeEventListener('mouseout', () => {
             setIsActive(false);
             setIsActiveClickable(false);
           });
@@ -184,29 +184,29 @@ export default function AnimatedCursor({
   const styles = {
     cursor: {
       zIndex: 999,
-      position: "fixed" as "fixed",
+      position: 'fixed' as 'fixed',
       opacity: 1,
-      pointerEvents: "none" as "none",
-      transition: "opacity 0.15s ease-in-out, transform 0.15s ease-in-out",
+      pointerEvents: 'none' as 'none',
+      transition: 'opacity 0.15s ease-in-out, transform 0.15s ease-in-out'
     },
     cursorInner: {
-      position: "fixed" as "fixed",
-      borderRadius: "50%",
+      position: 'fixed' as 'fixed',
+      borderRadius: '50%',
       width: innerSize,
       height: innerSize,
-      pointerEvents: "none" as "none",
+      pointerEvents: 'none' as 'none',
       backgroundColor: `rgba(${color}, 1)`,
-      transition: "opacity 0.15s ease-in-out, transform 0.25s ease-in-out",
+      transition: 'opacity 0.15s ease-in-out, transform 0.25s ease-in-out'
     },
     cursorOuter: {
-      position: "fixed" as "fixed",
-      borderRadius: "50%",
-      pointerEvents: "none" as "none",
+      position: 'fixed' as 'fixed',
+      borderRadius: '50%',
+      pointerEvents: 'none' as 'none',
       width: outerSize,
       height: outerSize,
       backgroundColor: `rgba(${color}, ${outerAlpha})`,
-      transition: "opacity 0.15s ease-in-out, transform 0.15s ease-in-out",
-    },
+      transition: 'opacity 0.15s ease-in-out, transform 0.15s ease-in-out'
+    }
   };
 
   return (

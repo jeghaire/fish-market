@@ -187,24 +187,6 @@
 html,
 body {
   cursor: none;
-  background-color: #2f2c2c;
-  color: #fff;
-}
-
-html *,
-body * {
-  cursor: none;
-}
-
-nav > a {
-  text-decoration: none;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.7);
-  transition: 0.5s ease;
-}
-nav > a:hover {
-  color: rgba(0, 0, 0, 0.5);
-  border-bottom-color: rgba(0, 0, 0, 0.1);
 }
 
 #cursor-dot,
